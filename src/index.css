@@ -53,12 +53,6 @@
 .m-0 {
   margin: 0;
 }
-/*!
- * Bootstrap  v5.2.3 (https://getbootstrap.com/)
- * Copyright 2011-2022 The Bootstrap Authors
- * Copyright 2011-2022 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -253,9 +247,11 @@ button {
 }
 
 button,
-[type=button] {
-  -webkit-appearance: button;
+[type="button"] {
+  appearance: button; 
+  -webkit-appearance: button; 
 }
+
 button:not(:disabled),
 [type=button]:not(:disabled) {
   cursor: pointer;
@@ -298,8 +294,10 @@ button:not(:disabled),
 
 ::file-selector-button {
   font: inherit;
-  -webkit-appearance: button;
+  appearance: button;
+  -webkit-appearance: button; 
 }
+
 
 .display-2 {
   font-size: calc(1.575rem + 3.9vw);
