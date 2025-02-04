@@ -1,16 +1,26 @@
 import Header from "./components/Header"
 import Guitar from "./components/Guitar"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import { db } from "./data/db"
 
 function App() {
+  const initialCart = () =>{
+    const localStorageCart = localStorage.getItem("cart");
+    return localStorageCart ? JSON.parse(localStorageCart):[]
+  }
 
+  const MAX_ITEMS=5
   const [data,setData]=useState(db)
-  const [cart,setCart]=useState([])
+  const [cart,setCart]=useState(initialCart)
+
+  useEffect(()=>{
+    localStorage.setItem("cart",JSON.stringify(cart))
+  },[cart])
 
   function addToCard(item){
     const itemExist=cart.findIndex(guitar => guitar.id===item.id)
     if(itemExist>=0){
+      if(cart[itemExist].quantity>=MAX_ITEMS)return
       const updateCart=[...cart]
       updateCart[itemExist].quantity++
       setCart(updateCart)
@@ -18,12 +28,50 @@ function App() {
       item.quantity =1
       setCart([...cart,item])
     }
+    
   }
+  function deleteProduc(id){
+    setCart((prevCart)=>(prevCart.filter((guitar)=>guitar.id!==id)))
+  }
+
+  function incrementProdutc(id){
+    const updateCart=cart.map(item=>{
+      if(item.id===id){
+        return {
+          ...item,
+          quantity:item.quantity+1
+        }
+      }
+      return item
+    })
+    setCart(updateCart)
+  }
+
+  function decrementProdutc(id){
+    const updateCart=cart.map(item=>{
+      if(item.id===id && item.quantity>1){
+        return {
+          ...item,
+          quantity:item.quantity-1
+        }
+      }
+      return item
+    })
+    setCart(updateCart)
+  }
+  function clearCart(){
+    setCart([]);
+  }
+    
 
   return (
     <>
       <Header
         cart={cart}
+        incrementProdutc={incrementProdutc}
+        deleteProduc={deleteProduc}
+        decrementProdutc={decrementProdutc}
+        clearCart={clearCart}
         />
 
     <main className="container-xl mt-5">
@@ -36,6 +84,7 @@ function App() {
                 guitar={guitar}
                 setCart={setCart}
                 addToCard={addToCard}
+                clearCart={clearCart}
             />
           ))}
             
