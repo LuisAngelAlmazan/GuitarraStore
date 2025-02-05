@@ -773,3 +773,23 @@ button:not(:disabled),
     z-index: 10;
   }
 }
+.guitar-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra */
+}
+
+.guitar-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+}
+
+
+.guitar-image {
+  height: 180px;
+  width: auto;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
