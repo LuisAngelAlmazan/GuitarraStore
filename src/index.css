@@ -756,10 +756,22 @@ button:not(:disabled),
   background-position: 50%;
   background-size: cover;
   position: relative;
+  animation: animarFondo 5s ease-out forwards; /* Cambié la animación para que se quede estático después */
 }
-.header .header-guitarra {
-  display: none;
+
+@keyframes animarFondo {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 80%;
+  }
+  100% {
+    background-position: 30% 50%; /* Se queda en la posición final */
+  }
 }
+
+
 @media (min-width: 992px) {
   .header .header-guitarra {
     display: block;
@@ -767,12 +779,18 @@ button:not(:disabled),
     right: 0;
     bottom: 0;
     animation-duration: 1s;
-    animation-delay: 0s;
-    animation-timing-function: ease-in-out;
     animation-name: animarImagen;
+    animation-timing-function: ease-in-out;
     z-index: 10;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Agregamos transición */
+  }
+
+  .header .header-guitarra:hover {
+    transform: scale(1.05); /* Ligeramente más grande */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Sombra para dar profundidad */
   }
 }
+
 .guitar-card {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   border-radius: 10px;
